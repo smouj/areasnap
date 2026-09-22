@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">AreaSnap</title>
+  <desc id="desc">Four crop-frame corners around a camera aperture/snap icon in amber.</desc>
+  <rect width="1024" height="1024" fill="#0F0F12"/>
+  <g fill="none" stroke="#F4F1EA" stroke-width="42" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M184 300V184h116"/>
+    <path d="M724 184h116v116"/>
+    <path d="M184 724v116h116"/>
+    <path d="M724 840h116V724"/>
+  </g>
+  <g fill="none" stroke="#FFB020" stroke-width="44" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="512" cy="508" r="140"/>
+    <circle cx="512" cy="508" r="56"/>
+  </g>
+  <path d="M400 340h48l36-52h56l36 52h48v56H400z" fill="#FFB020" stroke="none"/>
+  <text x="512" y="946" text-anchor="middle" fill="#F4F1EA" font-family="Segoe UI, Arial, sans-serif" font-size="96" font-weight="700" letter-spacing="3">AreaSnap</text>
+</svg>
