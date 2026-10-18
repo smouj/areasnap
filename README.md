@@ -24,7 +24,8 @@
   <a href="#overview">Overview</a> ·
   <a href="#current-status">Status</a> ·
   <a href="#usage">Usage</a> ·
-  <a href="#build-from-source">Build</a> ·
+  <a href="#build">Build</a> ·
+  <a href="#documentation">Docs</a> ·
   <a href="#privacy">Privacy</a>
 </p>
 
@@ -102,13 +103,13 @@ The `AreaSnap` paths and internal project names are intentionally retained for c
 
 The current capture implementation uses Windows desktop APIs through `System.Drawing`, `CopyFromScreen` and `PrintWindow`.
 
-## Build from source
+## Build
 
 Clone the repository and build with the .NET 8 SDK:
 
 ```powershell
-git clone https://github.com/smouj/areasnap
-cd areasnap
+git clone https://github.com/smouj/voryda-snap
+cd voryda-snap
 dotnet build -c Release
 ```
 
@@ -123,6 +124,10 @@ Create a self-contained Windows x64 build:
 ```powershell
 dotnet publish src\AreaSnap.App -c Release -r win-x64 --self-contained
 ```
+
+## Documentation
+
+This repository keeps its product and developer guidance in this README; no separate docs tree is maintained.
 
 ## Privacy
 
@@ -140,11 +145,11 @@ The source code is distributed under the **MIT License**. See [LICENSE](LICENSE)
 </p>
 
 <p align="center">
-  <a href="https://github.com/smouj/areasnap">Snap</a>
+  <a href="https://github.com/smouj/voryda-snap">Snap</a>
   ·
-  <a href="https://github.com/smouj/arearec">Rec</a>
+  <a href="https://github.com/smouj/voryda-rec">Rec</a>
   ·
-  <a href="https://github.com/smouj/areadown">Down</a>
+  <a href="https://github.com/smouj/voryda-down">Down</a>
   ·
-  <a href="https://github.com/smouj/areacut">Cut</a>
+  <a href="https://github.com/smouj/voryda-cut">Cut</a>
 </p>
