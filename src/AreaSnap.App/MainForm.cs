@@ -27,7 +27,7 @@ internal sealed class MainForm : Form
 
     public MainForm()
     {
-        Text = "AreaSnap";
+        Text = "Voryda Snap";
         StartPosition = FormStartPosition.CenterScreen;
         FormBorderStyle = FormBorderStyle.FixedSingle;
         MaximizeBox = false;
@@ -39,7 +39,7 @@ internal sealed class MainForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 18, FontStyle.Bold),
             Location = new Point(24, 22),
-            Text = "AreaSnap",
+            Text = "Voryda Snap",
         };
 
         var description = new Label
@@ -130,7 +130,7 @@ internal sealed class MainForm : Form
         {
             ContextMenuStrip = trayMenu,
             Icon = LoadApplicationIcon(),
-            Text = "AreaSnap",
+            Text = "Voryda Snap",
             Visible = true,
         };
         _tray.DoubleClick += (_, _) =>
