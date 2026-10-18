@@ -1,9 +1,9 @@
-# AreaSnap
+# Voryda Snap
 
 > Select an area. Capture it. Save or copy.
 
 A native Windows screenshot tool built with .NET 8 WinForms.
-Part of the [Area Suite](https://github.com/smouj) — simple, native tools for everyday tasks.
+Part of the **Voryda Suite** — simple, native, local-first tools for everyday tasks.
 
 ## Features
 
