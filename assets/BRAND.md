@@ -1,6 +1,6 @@
-# AreaSnap brand
+# Voryda Snap brand
 
-AreaSnap is the screenshot companion of the Area suite. Its identity keeps the shared crop-frame language, then adds a camera aperture circle and an amber accent so the product is related to the suite without being confused.
+Voryda Snap is the screenshot companion of the Voryda suite. Its identity keeps the shared crop-frame language, then adds a camera aperture circle and an amber accent so the product is related to the suite without being confused.
 
 ## Core assets
 
@@ -9,18 +9,18 @@ AreaSnap is the screenshot companion of the Area suite. Its identity keeps the s
 | `mark.png` | Transparent icon for app surfaces, favicons, and product UI |
 | `logo.png` | Dark lockup for README, documentation, and release pages |
 | `social-banner.png` | GitHub/social preview banner |
-| `AreaSnap.ico` | Windows executable and shortcut icon |
+| `AreaSnap.ico` | Windows executable and shortcut icon (legacy source filename retained for compatibility) |
 | `logo.svg` | Vector-friendly lockup for future design tooling |
 
 ## Tokens
 
 - Deep charcoal: `#0F0F12`
 - Warm ivory: `#F4F1EA`
-- AreaSnap amber: `#FFB020`
+- Voryda Snap amber: `#FFB020`
 - Muted graphite: `#25252B`
 
 Use the amber only as an accent. The crop frame and wordmark should remain ivory on dark surfaces; never add gradients, shadows, or a second highlight color.
 
-## Relationship to the Area suite
+## Relationship to the Voryda suite
 
-AreaRec owns capture and uses a recording red accent. AreaCut owns edit and uses coral. AreaDown owns download and uses teal. AreaSnap owns screenshot and uses amber. All four products share the four-corner selection frame and a dark local-first presentation.
+Voryda Rec owns recording and uses a recording red accent. Voryda Cut owns editing and uses coral. Voryda Down owns downloads and uses teal. Voryda Snap owns screenshots and uses amber. All four products share the four-corner selection frame and a dark local-first presentation.
