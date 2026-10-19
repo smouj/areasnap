@@ -31,9 +31,15 @@
 
 ## Overview
 
-**Voryda Snap** is a small native screenshot utility for Windows. It is built around two capture paths that are usable today: selecting a rectangular region or capturing the primary display. The result can be copied to the clipboard, written to disk, or both.
+**Voryda Snap** is a small native screenshot utility for Windows. It is built around three capture paths that are usable today: selecting a rectangular region, capturing the primary display, or selecting a visible window. The result can be copied to the clipboard, written to disk, or both.
 
 The application is implemented in C# on .NET 8 with WinForms. It runs locally, stores its preferences in a JSON file under the current Windows profile, and does not require an account or online service.
+
+## Screenshot
+
+![Voryda Snap screenshot](docs/screenshots/voryda-snap.png)
+
+*Captured from the Windows app. Sample URL and local folder values are anonymized where applicable.*
 
 ## Current status
 
@@ -45,17 +51,17 @@ The repository declares version **1.0.0**. There is currently no GitHub Release 
 | Primary-screen capture | **Implemented** | Captures the complete primary display. |
 | Clipboard output | **Implemented** | Copies the resulting bitmap to the Windows clipboard. |
 | File output | **Implemented** | PNG or JPEG. |
+| Window capture | **Implemented** | Choose a visible window from the picker; the selected window is captured with PrintWindow. |
 | JPEG quality | **Implemented** | Stored in settings; the default is 90. |
 | Global shortcut | **Implemented** | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>. |
 | System tray | **Implemented** | Region capture, full-screen capture and exit actions. |
-| Window capture engine | **Present** | The capture layer can capture a window handle through `PrintWindow`. |
-| Window-selection workflow | **Not completed** | The current UI exposes the mode but does not yet select and capture a window. |
 | GitHub Release | **Not published** | No release asset is currently available from GitHub Releases. |
 
 ## What it does
 
 - Captures a user-selected rectangular region.
 - Captures the complete primary display.
+- Captures a selected visible window through the window picker.
 - Saves images as **PNG** or **JPEG**.
 - Copies captures directly to the Windows clipboard.
 - Can copy and save the same capture in one operation.

@@ -56,7 +56,11 @@ public sealed class ScreenCapture : IDisposable
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
 
-        GetWindowRect(hwnd, out var rect);
+        if (hwnd == IntPtr.Zero)
+            throw new ArgumentException("A valid window handle is required.", nameof(hwnd));
+
+        if (!GetWindowRect(hwnd, out var rect))
+            throw new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error(), "Could not read the selected window bounds.");
         var width = rect.Right - rect.Left;
         var height = rect.Bottom - rect.Top;
 
@@ -64,20 +68,30 @@ public sealed class ScreenCapture : IDisposable
             throw new InvalidOperationException("Window has zero or negative dimensions.");
 
         var bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-        using var graphics = Graphics.FromImage(bitmap);
-
-        // Use PrintWindow for windows that don't respond to CopyFromScreen
-        var hdc = graphics.GetHdc();
         try
         {
-            PrintWindow(hwnd, hdc, 2); // PW_RENDERFULLCONTENT
-        }
-        finally
-        {
-            graphics.ReleaseHdc(hdc);
-        }
+            using var graphics = Graphics.FromImage(bitmap);
+            var hdc = graphics.GetHdc();
+            bool captured;
+            try
+            {
+                captured = PrintWindow(hwnd, hdc, 2); // PW_RENDERFULLCONTENT
+            }
+            finally
+            {
+                graphics.ReleaseHdc(hdc);
+            }
 
-        return bitmap;
+            if (!captured)
+                throw new InvalidOperationException("The selected app did not provide its window image. Try another window or capture a region instead.");
+
+            return bitmap;
+        }
+        catch
+        {
+            bitmap.Dispose();
+            throw;
+        }
     }
 
     /// <summary>
@@ -133,7 +147,7 @@ public sealed class ScreenCapture : IDisposable
         return name + extension;
     }
 
-    [DllImport("user32.dll")]
+    [DllImport("user32.dll", SetLastError = true)]
     private static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
     [DllImport("user32.dll")]

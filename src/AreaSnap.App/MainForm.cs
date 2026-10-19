@@ -123,8 +123,8 @@ internal sealed class MainForm : Form
         ]);
 
         var trayMenu = new ContextMenuStrip();
-        trayMenu.Items.Add("Capture region", null, (_, _) => DoCaptureAsync());
-        trayMenu.Items.Add("Capture fullscreen", null, (_, _) => DoCaptureFullscreenAsync());
+        trayMenu.Items.Add("Capture region", null, (_, _) => { _ = DoCaptureAsync(); });
+        trayMenu.Items.Add("Capture fullscreen", null, (_, _) => { _ = DoCaptureFullscreenAsync(); });
         trayMenu.Items.Add("Exit", null, (_, _) => Close());
         _tray = new NotifyIcon
         {
@@ -184,6 +184,21 @@ internal sealed class MainForm : Form
 
     private async Task DoCaptureAsync(CaptureMode mode)
     {
+        CaptureWindowChoice? selectedWindow = null;
+        if (mode == CaptureMode.Window)
+        {
+            _status.Text = "Choose a window to capture…";
+            using var picker = new WindowPickerForm();
+            var selectionResult = Visible ? picker.ShowDialog(this) : picker.ShowDialog();
+            if (selectionResult != DialogResult.OK || picker.SelectedWindow is null)
+            {
+                _status.Text = "Window selection cancelled";
+                return;
+            }
+
+            selectedWindow = picker.SelectedWindow;
+        }
+
         _status.Text = "Capturing…";
 
         // Save settings
@@ -221,9 +236,11 @@ internal sealed class MainForm : Form
                     break;
 
                 case CaptureMode.Window:
-                    _status.Text = "Click on a window to capture it";
-                    Show();
-                    return;
+                    if (selectedWindow is null)
+                        throw new InvalidOperationException("Choose a window before starting window capture.");
+                    region = selectedWindow.Bounds;
+                    bitmap = _screenCapture.CaptureWindow(selectedWindow.Handle);
+                    break;
 
                 case CaptureMode.FullScreen:
                 default:
