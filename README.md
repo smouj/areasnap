@@ -2,146 +2,108 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.png">
     <source media="(prefers-color-scheme: light)" srcset="assets/logo.png">
-    <img src="assets/logo.png" alt="Voryda Snap" width="220">
+    <img src="assets/logo.png" alt="Voryda Snap app icon" width="180">
   </picture>
 </p>
 
 <h1 align="center">Voryda Snap</h1>
 
 <p align="center">
-  <strong>Select an area. Capture it. Save or copy.</strong>
+  <strong>Capture a region, the primary display or a window.</strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D4?style=flat-square" alt="Windows 10 and 11">
+  <img src="https://img.shields.io/badge/platform-Windows%2010%202004%2B%20%7C%2011-0078D4?style=flat-square" alt="Windows 10 version 2004 or later and Windows 11">
   <img src="https://img.shields.io/badge/.NET-8-512BD4?style=flat-square" alt=".NET 8">
-  <img src="https://img.shields.io/badge/UI-WinForms-5C2D91?style=flat-square" alt="WinForms">
-  <img src="https://img.shields.io/badge/version-1.0.0-555?style=flat-square" alt="Version 1.0.0">
+  <img src="https://img.shields.io/badge/UI-WinForms-5C2D91?style=flat-square" alt="Windows Forms">
   <img src="https://img.shields.io/badge/license-MIT-2EA44F?style=flat-square" alt="MIT License">
 </p>
 
 <p align="center">
   <a href="#overview">Overview</a> ·
-  <a href="#current-status">Status</a> ·
-  <a href="#usage">Usage</a> ·
-  <a href="#build">Build</a> ·
-  <a href="#documentation">Docs</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#project-status">Status</a> ·
+  <a href="#build-from-source">Build</a> ·
   <a href="#privacy">Privacy</a>
 </p>
 
 ## Overview
 
-**Voryda Snap** is a small native screenshot utility for Windows. It is built around three capture paths that are usable today: selecting a rectangular region, capturing the primary display, or selecting a visible window. The result can be copied to the clipboard, written to disk, or both.
+**Voryda Snap** is a lightweight Windows screenshot utility written in C# with .NET 8 and Windows Forms. Capture a selected rectangle, the primary display, or a window, then copy the image to the clipboard, save it, or do both.
 
-The application is implemented in C# on .NET 8 with WinForms. It runs locally, stores its preferences in a JSON file under the current Windows profile, and does not require an account or online service.
+The app uses Windows desktop capture APIs locally. It does not require an account or a remote service. The current workflow is for capture and output; it does not include an image annotation editor.
+
+## Features
+
+- Capture a user-selected rectangular region.
+- Capture the primary display or choose a visible window from the picker.
+- Save images as PNG or JPEG, with a configurable JPEG quality.
+- Copy an image to the Windows clipboard, save it to disk, or do both.
+- Use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> to start the configured capture.
+- Restore capture preferences and output folder from local settings.
+- Use the system tray menu to restore the app, capture a region or the full screen, or exit.
+
+Window capture uses the Windows <code>PrintWindow</code> API. The result depends on how the target application renders its window; some windows may not provide a complete capture.
+
+## Project status
+
+The project metadata declares version **1.0.0**, but there is no public GitHub Release or release download at this time. Build the application from source using the instructions below.
 
 ## Screenshot
 
 ![Voryda Snap screenshot](docs/screenshots/voryda-snap.png)
 
-*Captured from the Windows app. Sample URL and local folder values are anonymized where applicable.*
-
-## Current status
-
-The repository declares version **1.0.0**. There is currently no GitHub Release published for this repository.
-
-| Capability | State | Notes |
-| --- | --- | --- |
-| Region capture | **Implemented** | Drag a rectangle over the desktop and capture its physical screen bounds. |
-| Primary-screen capture | **Implemented** | Captures the complete primary display. |
-| Clipboard output | **Implemented** | Copies the resulting bitmap to the Windows clipboard. |
-| File output | **Implemented** | PNG or JPEG. |
-| Window capture | **Implemented** | Choose a visible window from the picker; the selected window is captured with PrintWindow. |
-| JPEG quality | **Implemented** | Stored in settings; the default is 90. |
-| Global shortcut | **Implemented** | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>. |
-| System tray | **Implemented** | Region capture, full-screen capture and exit actions. |
-| GitHub Release | **Not published** | No release asset is currently available from GitHub Releases. |
-
-## What it does
-
-- Captures a user-selected rectangular region.
-- Captures the complete primary display.
-- Captures a selected visible window through the window picker.
-- Saves images as **PNG** or **JPEG**.
-- Copies captures directly to the Windows clipboard.
-- Can copy and save the same capture in one operation.
-- Hides the main window before capturing to keep it out of the screenshot.
-- Keeps capture mode, format, output folder and output preferences between sessions.
-- Provides a tray menu and the global <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> shortcut.
-- Shows the captured dimensions and, when saved, the filename and file size.
+*The screenshot shows the current Windows application.*
 
 ## Usage
 
-1. Choose **Region** or **FullScreen**.
+1. Choose **Region**, **FullScreen** or **Window** as the capture mode.
 2. Select **PNG** or **JPG**.
-3. Choose whether to copy to the clipboard, save to a file, or do both.
-4. Set the destination folder when file output is enabled.
+3. Choose whether the capture should be copied to the clipboard, saved to disk, or both.
+4. Select the destination folder when saving is enabled.
 5. Press **Capture** or use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>.
-6. In Region mode, drag over the area to capture.
+6. For a region capture, drag to select the area. For a window capture, choose a visible window in the picker.
 
-The default configuration uses Region mode, PNG output, clipboard copy and file saving.
+The default settings use Region mode, PNG output, clipboard copy and file saving.
 
 ## Local data
 
-| Item | Location / default |
+| Item | Location or default |
 | --- | --- |
-| Settings | `%APPDATA%\AreaSnap\settings.json` |
-| Default image folder | `%USERPROFILE%\Pictures\AreaSnap` |
-| Default filename template | `AreaSnap-{yyyyMMdd-HHmmss}` |
+| Settings | <code>%APPDATA%\AreaSnap\settings.json</code> |
+| Default image folder | <code>%USERPROFILE%\Pictures\AreaSnap</code> |
+| Default filename | <code>AreaSnap-{yyyyMMdd-HHmmss}</code> |
 | Default format | PNG |
 | Default JPEG quality | 90 |
 
-The `AreaSnap` paths and internal project names are intentionally retained for compatibility while the public product name moves to **Voryda Snap**.
+The <code>AreaSnap</code> paths and internal project names remain in place for compatibility while the public product name is Voryda Snap.
 
 ## Requirements
 
 - Windows 10 version 2004 (build 19041) or later, or Windows 11.
-- .NET 8 runtime for a framework-dependent build.
-- .NET 8 SDK only when building from source.
+- .NET 8 Desktop Runtime to run a framework-dependent build.
+- .NET 8 SDK to build from source.
 
-## Architecture
+## Build from source
 
-| Project | Responsibility |
-| --- | --- |
-| `AreaSnap.App` | WinForms shell, persisted settings, tray integration and global shortcut. |
-| `AreaSnap.Core` | Capture settings, output format and result models. |
-| `AreaSnap.Capture` | Screen, region and window-handle capture implementation. |
-
-The current capture implementation uses Windows desktop APIs through `System.Drawing`, `CopyFromScreen` and `PrintWindow`.
-
-## Build
-
-Clone the repository and build with the .NET 8 SDK:
-
-```powershell
-git clone https://github.com/smouj/voryda-snap
-cd voryda-snap
-dotnet build -c Release
-```
-
-Run the application project:
-
-```powershell
-dotnet run --project src\AreaSnap.App\AreaSnap.App.csproj
-```
+    git clone https://github.com/smouj/voryda-snap
+    cd voryda-snap
+    dotnet build -c Release
+    dotnet run --project src\AreaSnap.App\AreaSnap.App.csproj
 
 Create a self-contained Windows x64 build:
 
-```powershell
-dotnet publish src\AreaSnap.App -c Release -r win-x64 --self-contained
-```
+    dotnet publish src\AreaSnap.App -c Release -r win-x64 --self-contained
 
-## Documentation
-
-This repository keeps its product and developer guidance in this README; no separate docs tree is maintained.
+This repository keeps its product and developer guidance in this README.
 
 ## Privacy
 
-Voryda Snap does not need an account, cloud storage or a remote API for its capture workflow. Captures are copied to the local clipboard and/or written to the folder selected by the user. Application settings remain in the local Windows profile.
+Captures and preferences stay on the local machine unless the user copies or saves them elsewhere. The current app has no account system, telemetry or cloud upload workflow.
 
 ## License
 
-The source code is distributed under the **MIT License**. See [LICENSE](LICENSE).
+Voryda Snap is distributed under the [MIT License](LICENSE).
 
 ---
 
@@ -151,11 +113,9 @@ The source code is distributed under the **MIT License**. See [LICENSE](LICENSE)
 </p>
 
 <p align="center">
-  <a href="https://github.com/smouj/voryda-snap">Snap</a>
-  ·
-  <a href="https://github.com/smouj/voryda-rec">Rec</a>
-  ·
-  <a href="https://github.com/smouj/voryda-down">Down</a>
-  ·
+  <a href="https://github.com/smouj/voryda-snap">Snap</a> ·
+  <a href="https://github.com/smouj/voryda-rec">Rec</a> ·
+  <a href="https://github.com/smouj/voryda-down">Down</a> ·
   <a href="https://github.com/smouj/voryda-cut">Cut</a>
 </p>
+
