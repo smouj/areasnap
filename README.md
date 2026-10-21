@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/logo.png">
-    <img src="assets/logo.png" alt="Voryda Snap app icon" width="180">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/smouj/voryda-snap/main/assets/logo-dark.png?v=e7158076109eeb15cc99427d45acea1df2a7448f3a02f824ce942681ba18fdce">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/smouj/voryda-snap/main/assets/logo.png?v=e7158076109eeb15cc99427d45acea1df2a7448f3a02f824ce942681ba18fdce">
+    <img src="https://raw.githubusercontent.com/smouj/voryda-snap/main/assets/logo.png?v=e7158076109eeb15cc99427d45acea1df2a7448f3a02f824ce942681ba18fdce" alt="Voryda Snap app icon" width="180">
   </picture>
 </p>
 
